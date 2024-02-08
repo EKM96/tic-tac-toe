@@ -2,7 +2,11 @@ const gameboard = {
   cells: [1, 2, 3, 4, 5, 6, 7, 8, 9],  
 }
   
-const user = {};
+const user = {
+  select(num) {
+
+  }
+};
   
 const cpu = {
   turn() {
@@ -29,9 +33,29 @@ function randomStart() {
 
 function updateActiveCells(arr, item) { arr.splice(arr.indexOf(item), 1) }
     
+function searchAgainstActiveCells(cell) { return gameboard.cells.includes(cell) };
+
+function selectCell(num) {
+  const repeated = searchAgainstActiveCells(num) === false;
+  
+  if (repeated) {
+    logMessage('Select another cell, cell already taken');
+    return;
+
+  } else {
+    updateActiveCells(gameboard.cells, num);
+    logMessage(`Selected cell: ${num}`);
+    logMessage(`Active cells: ${gameboard.cells}`);
+  }
+}
+
 function init() {
   randomStart();
 }
+
+
+
+
 
 
 
